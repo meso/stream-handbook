@@ -63,9 +63,12 @@ is the enemy and to seek the best abstractions for the problem at hand.
 -->
 # なぜストリームを使うべきなのか
 
+<!--
 I/O in node is asynchronous, so interacting with the disk and network involves
 passing callbacks to functions. You might be tempted to write code that serves
 up a file from disk like this:
+-->
+NodeのI/Oは非同期なので、ハードディスクやネットワークに対して対話的に関数のコールバックを通じてやり取りします。ファイルをアップするサーバーを以下のように書きたい衝動に駆られるでしょう。
 
 ``` js
 var http = require('http');
@@ -83,16 +86,22 @@ var server = http.createServer(function (req, res) {
 server.listen(8000);
 ```
 
+<!--
 This code works but it's bulky and buffers up the entire `data.txt` file into
 memory for every request before writing the result back to clients. If
 `data.txt` is very large, your program could start eating a lot of memory as it
 serves lots of users concurrently. The latency will also be high as users will
 need to wait for the entire file to be read before they start receiving the
 contents.
+-->
+このコードは動きはしますが、扱いにくく`data.txt`ファイルを全てのリクエストがクライアントに結果として返す前にメモリにバッファとして書き込んでしまいます。もし、`data.txt`が非常に大きい場合は、このプログラムはユーザー数と同じだけの大量のメモリを消費しはじめるでしょう。また、ユーザーがコンテンツを受け始める前に、ファイル全てを読み込まれるので待たされる上、レイテンシは非常に高いものになるでしょう。
 
+<!--
 Luckily both of the `(req, res)` arguments are streams, which means we can write
 this in a much better way using `fs.createReadStream()` instead of
 `fs.readFile()`:
+-->
+ラッキーなことに`(req, res)`の両方の引数はStreamです。これはファイルの書き込みに`fs.readFile()`よりも良い方法である`fs.createReadStream()`を使えるという事です。
 
 ``` js
 var http = require('http');
@@ -109,19 +118,28 @@ var server = http.createServer(function (req, res) {
 server.listen(8000);
 ```
 
+<!--
 Here `.pipe()` takes care of listening for `'data'` and `'end'` events from the
 `fs.createReadStream()`. This code is not only cleaner, but now the `data.txt`
 file will be written to clients one chunk at a time immediately as they are
 received from the disk.
+-->
+この`.pipe()`は`fs.createReadStream()`から`'data'`と`'end'`イベントを待ち受けています。このコードはキレイなだけではなく、いまや`data.txt`ファイルがハードディスクから読み込まれれば即時に、クライアントに1つのチャンクとして書き込まれるようになりました。
 
+<!--
 Using `.pipe()` has other benefits too, like handling backpressure automatically
 so that node won't buffer chunks into memory needlessly when the remote client
 is on a really slow or high-latency connection.
+-->
+`.pipe()`の使用は他にも利点があります。それは、自動的に背圧制御できるのでリモートクライアントが非常に遅い時や、高レイテンシで接続している時などにNodeが必要もないのにチャンクをバッファとしてメモリに書き込んだりしなくても良いという点です。
 
+<!--
 But this example, while much better than the first one, is still rather verbose.
 The biggest benefit of streams is their versatility. We can
 [use a module](https://npmjs.org/) that operates on streams to make that example
 even simpler:
+-->
+しかし、このサンプルは最初のものよりもずっと良いのですが、まだ冗長です。Streamの一番大きい利点は、Streamが多機能であるという点です。Streamを扱う[モジュール](https://npmjs.org/)を使ってもっとシンプルなサンプルを作ってみましょう。
 
 ``` js
 var http = require('http');
@@ -133,10 +151,16 @@ var server = http.createServer(function (req, res) {
 server.listen(8000);
 ```
 
+<!--
 With the [filed module](http://github.com/mikeal/filed) we get mime types, etag
 caching, and error handling for free in addition to a nice streaming API.
+-->
+[filedモジュール](http://github.com/mikeal/filed)を使うと、mimeタイプ・etagキャシュや例外処理などの素晴しいStream APIを苦労無く使うことができます。
 
+<!--
 Want compression? There are streaming modules for that too!
+-->
+圧縮がしたいですか？それもStreamモジュールにあります！
 
 ``` js
 var http = require('http');
@@ -152,15 +176,24 @@ var server = http.createServer(function (req, res) {
 server.listen(8000);
 ```
 
+<!--
 Now our file is compressed for browsers that support gzip or deflate! We can
 just let [oppressor](https://github.com/substack/oppressor) handle all that
 content-encoding stuff.
+-->
+これでgzipかdeflateがサポートされているブラウザ用にファイルを圧縮することができました！ただ[oppressor](https://github.com/substack/oppressor)でコンテンツのエンコードを全て扱わせただけです。
 
+<!--
 Once you learn the stream api, you can just snap together these streaming
 modules like lego bricks or garden hoses instead of having to remember how to push
 data through wonky non-streaming custom APIs.
+-->
+一度Stream APIを勉強すると、あてにならない非Stream用APIを使ってデータをどんな風にプッシュするかを思い出す代わりに、レゴブロックやガーデンホースのようにStreamモジュール郡をピタっと合わせていくだけで良いのです。
 
+<!--
 Streams make programming in node simple, elegant, and composable.
+-->
+StreamはNodeをシンプル・エレガントに、そして分割性を与えてくれます。
 
 # basics
 
