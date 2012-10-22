@@ -1,0 +1,8 @@
+{
+  "name" : "stream-handbook-scuttlebutt-example",
+  "private" : true,
+  "version" : "0.0.0",
+  "dependencies" : {
+    "scuttlebutt" : "~3.2.3"
+  }
+}
