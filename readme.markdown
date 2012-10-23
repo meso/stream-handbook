@@ -16,7 +16,7 @@ another segment when it becomes necessary to massage data in
 another way. This is the way of IO also."
 ```
 -->
->プログラム同士をガーデニング用のホースのようにつなぎ合わせる仕組み、すなわち、データを何か別の方法で操作する必要が出てきたときに、他の部分にねじ込めるような仕組みがあるべきではないか。IOについても同じことが言える。（[ダグラス・マッキルロイ 1964年10月11日](http://cm.bell-labs.com/who/dmr/mdmpipe.html)）
+>プログラム同士をガーデニング用のホースのようにつなぎ合わせる仕組み、すなわち、データを何か別の方法で操作する必要が出てきたときに、他の部分につなぎ込めるような仕組みがあるべきではないか。IOについても同じことが言える。（[ダグラス・マッキルロイ 1964年10月11日](http://cm.bell-labs.com/who/dmr/mdmpipe.html)）
 
 ![doug mcilroy](http://substack.net/images/mcilroy.png)
 
@@ -48,7 +48,7 @@ You can then plug the output of one stream to the input of another and
 [use libraries](http://npmjs.org) that operate abstractly on streams to
 institute higher-level flow control.
 -->
-ストリームは、実装の表面を[再利用](http://www.faqs.org/docs/artu/ch01s06.html#id2877537)しやすい一貫性したインタフェースとして限定することで、[関心の分離](http://www.c2.com/cgi/wiki?SeparationOfConcerns)を促進します。だからこそ、1つのストリームの出力を他のストリームの入力へと繋ぐことができるのです。また、抽象的にストリームを操作する[ライブラリを用いる](http://npmjs.org)ことで、高レベルなフローコントロールを導入することもできます。
+ストリームは、実装の表面を[再利用](http://www.faqs.org/docs/artu/ch01s06.html#id2877537)しやすい一貫性したインタフェースとして限定することで、[関心の分離](http://www.c2.com/cgi/wiki?SeparationOfConcerns)を促進します。だからこそ、1つのストリームの出力を他のストリームの入力へとつなぐことができるのです。また、抽象的にストリームを操作する[ライブラリを用いる](http://npmjs.org)ことで、高レベルなフローコントロールを導入することもできます。
 
 <!--
 Streams are an important component of
@@ -137,7 +137,7 @@ Using `.pipe()` has other benefits too, like handling backpressure automatically
 so that node won't buffer chunks into memory needlessly when the remote client
 is on a really slow or high-latency connection.
 -->
-`.pipe()`のメリットは他にもあります。自動的に背圧の制御をしてくれるので、リモートクライアントが非常に遅い時や、高レイテンシで接続している時などに、Nodeが必要もないのにチャンクをバッファとしてメモリに書き込んだりしなくても良いという点です。
+`.pipe()`のメリットは他にもあります。自動的に背圧の制御をしてくれるので、リモートクライアントが非常に遅い時や、高レイテンシで接続している時などに、Nodeが必要もないのにチャンクをバッファとしてメモリに書き込んだりしなくてもよいという点です。
 
 <!--
 But this example, while much better than the first one, is still rather verbose.
@@ -187,19 +187,19 @@ Now our file is compressed for browsers that support gzip or deflate! We can
 just let [oppressor](https://github.com/substack/oppressor) handle all that
 content-encoding stuff.
 -->
-これでgzipかdeflateがサポートされているブラウザ用にファイルを圧縮することができました！ただ[oppressor](https://github.com/substack/oppressor)でコンテンツのエンコードを全て扱わせただけです。
+これでgzipかdeflateがサポートされているブラウザ用にファイルを圧縮することができました！　ただ[oppressor](https://github.com/substack/oppressor)にコンテンツのエンコードを全て任せてしまっただけです。
 
 <!--
 Once you learn the stream api, you can just snap together these streaming
 modules like lego bricks or garden hoses instead of having to remember how to push
 data through wonky non-streaming custom APIs.
 -->
-一度ストリームAPIを使いこなせるようになれば、レゴブロックやガーデニング用のホースのように、ストリームのモジュールをピタっと合わせていくだけで良いのです。ふぞろいな非ストリームAPIを使って、データをどんな風にプッシュするかを覚えておく必要もなくなります。
+一度ストリームAPIを使いこなせるようになれば、レゴブロックやガーデニング用のホースのように、ストリームのモジュールをピタっと合わせていくだけでよいのです。ふぞろいな非ストリームAPIを使って、データをどんな風にプッシュするかを覚えておく必要もなくなります。
 
 <!--
 Streams make programming in node simple, elegant, and composable.
 -->
-ストリームはNodeをシンプル・エレガントに、そして分割性を与えてくれます。
+ストリームはNodeのプログラミングをシンプル、エレガントで、組み立てやすいものにします。
 
 <!--
 # basics
@@ -214,7 +214,7 @@ that have a
 function and expected to act in a certain way depending if the stream is
 readable, writable, or both (duplex).
 -->
-ストリームは単なる[EventEmitter](http://nodejs.org/docs/latest/api/events.html#events_class_events_eventemitter)に[.pipe()](http://nodejs.org/docs/latest/api/stream.html#stream_stream_pipe_destination_options)メソッドをつけたもので、readableか、writableか、それともその両方か(duplex)に応じて、決められたふるまいが求められます。
+ストリームは単なる[EventEmitter](http://nodejs.org/docs/latest/api/events.html#events_class_events_eventemitter)に[.pipe()](http://nodejs.org/docs/latest/api/stream.html#stream_stream_pipe_destination_options)メソッドをつけたもので、readableか、writableか、それともその両方か(duplex)に応じて、決められた動作を期待されます。
 
 <!--
 To create a new stream, just do:
@@ -241,7 +241,7 @@ writable.
 To make that stream `s` into a readable stream, all we need to do is set the
 `readable` property to true:
 -->
-このストリーム`s`をreadableなものにするには、単に`reaaable`プロパティをtrueにすればそれでおしまいです。
+このストリーム`s`をreadableなものにするには、単に`reaaable`プロパティをtrueにするだけで大丈夫です。
 
 ``` js
 s.readable = true
@@ -318,13 +318,13 @@ Writable streams are streams that can accept input. To create a writable stream,
 set the `writable` attribute to `true` and define `write()`, `end()`, and
 `destroy()`.
 -->
-writableストリームとは、入力を受け取れるストリームのことです。writableストリームを作るには、`writable`プロパティを真にして、`write()`と`end()`、そして`destroy()`を定義します。
+writableストリームとは、入力を受け取れるストリームのことです。writableストリームを作るには、`writable`プロパティをtrueにして、`write()`と`end()`、そして`destroy()`を定義します。
 
 <!--
 This writable stream will count all the bytes from an input stream and print the
 result on a clean `end()`. If the stream is destroyed it will do nothing.
 -->
-以下のwritableストリームは、受け取ったストリームからバイト数を数えて、結果をシンプルな`end()`でプリントします。もしストリームが破棄(destroy)された場合には何もしません。
+以下のwritableストリームは、受け取ったストリームからバイト数を数えて、結果をシンプルな`end()`で出力します。もしストリームが破棄(destroy)された場合には何もしません。
 
 ``` js
 var Stream = require('stream');
@@ -370,7 +370,7 @@ One thing to watch out for is the convention in node to treat `end(buf)` as a
 `write(buf)` then an `end()`. If you skip this it could lead to confusion
 because people expect end to behave the way it does in core.
 -->
-ここで注意すべきなのは、`end(buf)`を`write(buf)`と`end()`の組み合わせとして扱うNodeの慣習です。他の人はendがコアモジュールで用いられているものと同様にふるまうことを期待するので、これを省略するのは混乱の原因となります。
+ここで注意すべきなのは、`end(buf)`を`write(buf)`と`end()`の組み合わせとして扱うNodeの慣習です。他の人はendがコアモジュールで用いられているものと同様にふるまうと期待するので、これを省略するのは混乱の原因となります。
 
 <!--
 ## backpressure
@@ -457,7 +457,7 @@ for a readable stream `src` and a writable stream `dst`. `.pipe()` returns the
 `dst` so if `dst` is also a readable stream, you can chain `.pipe()` calls
 together like:
 -->
-readableストリームである`src`と、writableストリームの`dst`に対して、`.pipe()`は`dst`を返します。なので、この`dst`はreadableストリームでもあるときには、以下のように`.pipe()`をつなぎ合わせることができます、
+readableストリームである`src`と、writableストリームの`dst`に対して、`.pipe()`は`dst`を返します。なので、この`dst`がreadableストリームでもあるときには、以下のように`.pipe()`をつなぎ合わせることができます、
 
 ``` js
 a.pipe(b).pipe(c).pipe(d)
@@ -639,13 +639,13 @@ This writable stream contains the standard system error stream for your program.
 This function returns a [duplex stream] that connects over tcp to a remote
 host.
 -->
-この関数はtcpによるリモートホストへ接続する[duplexストリーム]を返します。
+この関数はtcpを使ってリモートホストへ接続する[duplexストリーム]を返します。
 
 <!--
 You can start writing to the stream right away and the writes will be buffered
 until the `'connect'` event fires.
 -->
-ストリームへの書き込みはすぐに行なうことができて、`connect`イベントが発行されるまでバッファされます。
+ストリームへの書き込みはすぐに行うことができて、`connect`イベントが発行されるまでバッファされます。
 
 ### net.createServer()
 
@@ -730,7 +730,7 @@ peer-to-peer state synchronization with a mesh topology where nodes might only
 be connected through intermediaries and there is no node with an authoritative
 version of all the data.
 -->
-[scuttlebutt](https://github.com/dominictarr/scuttlebutt)はP2Pによる状態の同期にも利用できます。このメッシュ状のトポロジーにおいては、ノードは仲介者を通じて連結されているだけで、全てのデータのバージョンを管理するような特権的なノードは存在しません。
+[scuttlebutt](https://github.com/dominictarr/scuttlebutt)はP2Pによる状態の同期に利用できます。このメッシュ状のトポロジーにおいては、ノードは仲介者を通じて連結されているだけで、全てのデータのバージョンを管理するような特権的なノードは存在しません。
 
 <!--
 The kind of distributed peer-to-peer network that
@@ -749,7 +749,7 @@ systems that span internal networks since IPv4 addresses are scarce.
 to pass messages between connected nodes so that state across all the nodes will
 [eventually converge](https://en.wikipedia.org/wiki/Eventual_consistency)
 on the same value everywhere.
-[scuttlebutt](https://github.com/dominictarr/scuttlebutt)においては、連結したノード同士が[結果整合性](https://en.wikipedia.org/wiki/Eventual_consistency)を保ちながら同じ値を共有する手段として、メッセージの受け渡しに[Gossipプロトコル](https://en.wikipedia.org/wiki/Gossip_protocol)という手段を用いています。
+[scuttlebutt](https://github.com/dominictarr/scuttlebutt)においては、連結したノード同士が[結果整合性](https://en.wikipedia.org/wiki/Eventual_consistency)を保ちながら同じ値を共有する手段として、メッセージの受け渡しに[Gossipプロトコル](https://en.wikipedia.org/wiki/Gossip_protocol)を用いています。
 
 <!--
 Using the `scuttlebutt/model` interface, we can create some nodes and pipe them
@@ -817,7 +817,7 @@ the value that node `a` set finds its way to node `e` by way of nodes `b` and
 simple streaming interface, the nodes can be placed on any process or server and
 connected with any streaming transport that can handle string data.
 -->
-ノード`a`にセットされた値はノード`b`と`d`を経由して`e`への道筋を見いだします。この例では全てのノードが同じプロセス上にありますが、[scuttlebutt](https://github.com/dominictarr/scuttlebutt)はシンプルなストリーミングのインターフェースを利用しているので、ノードはどのプロセスに、どのサーバに置かれていても、また文字列を扱うことができさえすれば、どんなストリーミングのトランスポートであっても大丈夫です。
+ノード`a`にセットされた値はノード`b`と`d`を経由して`e`への経路を見つけます。この例では全てのノードが同じプロセス上にありますが、[scuttlebutt](https://github.com/dominictarr/scuttlebutt)はシンプルなストリームのインターフェースを利用しているので、ノードはどのプロセスに、どのサーバに置かれていても、また文字列を扱うことができさえすれば、どんなストリームのトランスポートを使っていても大丈夫です。
 
 <!--
 Next we can make a more realistic example that connects over the network and
@@ -829,7 +829,7 @@ increments a counter variable.
 Here's the server which will set the initial `count` value to 0 and `count ++`
 every 320 milliseconds, printing all updates to count:
 -->
-この例では、サーバは`count`の初期値を0にセットし、320ミリ秒ごとに`count ++`を実行、countの更新があるたびにプリントします。
+この例では、サーバは`count`の初期値を0にセットし、320ミリ秒ごとに`count ++`を実行、countの更新があるたびに出力します。
 
 ``` js
 var Model = require('scuttlebutt/model');
@@ -855,7 +855,7 @@ setInterval(function () {
 Now we can make a client that connects to this server, updates the count on an
 interval, and prints all the updates it receives:
 -->
-さて、このサーバに接続して、countの値を一定時間ごとに更新、受け取った更新をプリントするクライアントを作ることができます。
+さて、このサーバに接続して、countの値を一定時間ごとに更新、受け取った更新を出力するクライアントを作ることができます。
 
 ``` js
 var Model = require('scuttlebutt/model');
@@ -886,7 +886,7 @@ The client is slightly trickier since it should wait until it has an update from
 somebody else to start updating the counter itself or else its counter would be
 zeroed.
 -->
-クライアントは少しだけ奇妙な書き方をしています。誰かから更新を受けとるまで、自身によるカウンタの更新を待たなければならないからです。そうしないとカウンタは0になってしまう可能性があります。
+クライアントは少しだけ奇妙な書き方をしています。誰かから更新を受けとるまで、自身によるカウンタの更新を待たなければならないからです。そうしないとカウンタが0になってしまう可能性があります。
 
 <!--
 Once we get the server and some clients running we should see a sequence like this:
@@ -922,7 +922,7 @@ These values are due to
 [scuttlebutt's](https://github.com/dominictarr/scuttlebutt)
 history-based conflict resolution algorithm which is hard at work ensuring that the state of the system across all nodes is eventually consistent.
 -->
-このような値をとるのは、[scuttlebutt's](https://github.com/dominictarr/scuttlebutt)の履歴ベースの衝突解消アルゴリズムが、全てのノードの状態の最終的に一貫したものにするために作動しているからです。
+このような値をとるのは、[scuttlebutt's](https://github.com/dominictarr/scuttlebutt)の履歴ベースの衝突解消アルゴリズムが、全てのノードの状態を結果的に整合させるよう動作しているからです。
 
 <!--
 Note that the server in this example is just another node with the same
@@ -932,7 +932,7 @@ connection. Protocols with this property are often called symmetric protocols.
 See [dnode](https://github.com/substack/dnode) for another example of a
 symmetric protocol.
 -->
-ここで取り上げた例において、サーバとは、接続してくるクライアントと同等の権限しか持たないノードの1つに過ぎません。「クライアント」と「サーバ」という用法は、単に誰がコネクションの口火を切るのかに関連しているだけで、状態の同期がどのような手順に従うかとは無関係です。このような性質を備えたプロトコルはしばしばシンメトリック・プロトコルと呼ばれています。シンメトリック・プロトコルに関する別の例として[dnode](https://github.com/substack/dnode)もご覧ください。
+ここで取り上げた例において、サーバとは、接続してくるクライアントと同等の権限しか持たないノードの1つに過ぎません。「クライアント」「サーバ」という用法は、単に誰がコネクションの口火を切るかに関連しているだけで、状態の同期がどのような手順に従うかとは無関係です。このような性質を備えたプロトコルはしばしばシンメトリック・プロトコルと呼ばれています。シンメトリック・プロトコルに関する別の例として[dnode](https://github.com/substack/dnode)も見てください。
 
 ***
 <!--
@@ -990,6 +990,9 @@ incrementally as it arrives.
 
 ***
 
+<!--
+# browser streams
+-->
 # ブラウザストリーム
 
 ## [shoe](https://github.com/substack/shoe)
@@ -1053,7 +1056,7 @@ server.listen(5004);
 then you can hack up a simple client that calls the server's `.transform()`
 function:
 -->
-さて、サーバの`.transform()`を呼び出すシンプルなクライアントにかかりましょう。
+さて、サーバの`.transform()`を呼び出すシンプルなクライアントに取りかかりましょう。
 
 ``` js
 var dnode = require('dnode');
@@ -1092,7 +1095,7 @@ The streaming interface that dnode provides here is a duplex stream since both
 the client and server are piped to each other (`c.pipe(d).pipe(c)`) with
 requests and responses coming from both sides.
 -->
-ここでdnodeが提供するストリームのインターフェースはduplexストリームだと言えます。というのも、クライアントとサーバの双方がパイプでつながれていて`c.pipe(d).pipe(c)`、リクエストとレスポンスが両サイドからやってくるからです。
+ここでdnodeが提供するストリームのインターフェースがduplexストリームです。というのも、クライアントとサーバの双方がパイプでつながれていて(`c.pipe(d).pipe(c)`)、リクエストとレスポンスが両サイドからやってくるからです。
 
 <!--
 The craziness of dnode begins when you start to pass function arguments to
@@ -1231,7 +1234,7 @@ The object stream can then be fed into
 to serialize the objects and from there the serialized stream can be piped into
 the remote browser.
 -->
-まず、サーバサイドのwebsocketハンドラとして[shoe](http://github.com/substack/shoe)が使えます。EventEmiterを、オブジェクトをemit可能なストリームに変換するには[emit-stream](https://github.com/substack/emit-stream)が利用できます。オブジェクトのストリームは[JSONStream](https://github.com/dominictarr/JSONStream)によってシリアライズされ、シリアライズされたストリームはリモートのブラウザにパイプできます。
+まず、サーバサイドのwebsocketハンドラとしては[shoe](http://github.com/substack/shoe)が使えます。EventEmiterを、オブジェクトをemit可能なストリームに変換するには[emit-stream](https://github.com/substack/emit-stream)が利用できます。オブジェクトのストリームは[JSONStream](https://github.com/dominictarr/JSONStream)によってシリアライズされ、シリアライズされたストリームはリモートのブラウザにパイプできます。
 
 ``` js
 var EventEmitter = require('events').EventEmitter;
@@ -1338,7 +1341,7 @@ global event system socket.io-style, you can focus more on breaking up your
 application into tinier units of functionality that can do exactly one thing
 well.
 -->
-このようなストリーム的なアプローチを活用することで、ストリームと対話する方法のみを知っているような、コンパクトで再利用可能な部品を当てにすることができます。メッセージのルーティングをsocket.io型のグローバルなイベント機構によって行う代わりに、アプリケーションを、たった1つのことをうまくやるだけの小さな機能のかたまりに分けることだけに頭を使えばよくなります。
+このようなストリーム的なアプローチを活用することで、ストリームと対話する方法のみを知っているような、コンパクトで再利用可能な部品に頼れるようになります。メッセージのルーティングをsocket.io型のグローバルなイベント機構を使って行う代わりに、アプリケーションを、たった1つのことをうまくやる小さな機能のかたまりに分けることのみに集中すればよくなります。
 
 <!--
 For instance you can trivially swap out JSONStream in this example for
@@ -1351,9 +1354,9 @@ You could even add a stream into the chain to use namespaced events with
 [eventemitter2](https://npmjs.org/package/eventemitter2) instead of the
 EventEmitter in core.
 -->
-ちょっとした例を挙げましょう。様々な条件を考慮して別の方法でシリアライズをしようと考えた場合には、上のサンプルで用いたJSONStreamを[stream-serializer](https://github.com/dominictarr/stream-serializer)に交換できます。ストリームのシンプルなインターフェースを利用することで、[reconnections](https://github.com/dominictarr/reconnect)やheartbeatsを管理するレイヤーをshoeに取り付けることもできます。コアモジュールのEventEmitterの代わりに、[eventemitter2](https://npmjs.org/package/eventemitter2)による名前空間つきイベントを利用する場合でさえも、ストリームを組み込むことができます。
+ちょっとした例を挙げましょう。様々な条件を考慮して別の方法でシリアライズをしようと考えた場合には、上のサンプルで用いたJSONStreamを[stream-serializer](https://github.com/dominictarr/stream-serializer)に交換できます。ストリームのシンプルなインターフェースを利用することで、[reconnections](https://github.com/dominictarr/reconnect)やheartbeatsを管理するレイヤーをshoeに取りつけることもできます。コアモジュールのEventEmitterの代わりに、[eventemitter2](https://npmjs.org/package/eventemitter2)による名前空間つきイベントを利用する場合でさえも、ストリームを組み込むことができます。
 
-<--
+<!--
 If you want some different streams that act in different ways it would likewise
 be pretty simple to run the shoe stream in this example through mux-demux to
 create separate channels for each different kind of stream that you need.
@@ -1365,4 +1368,4 @@ As the requirements of your system evolve over time, you can swap out each of
 these streaming pieces as necessary without as many of the all-or-nothing risks
 that more opinionated framework approaches necessarily entail.
 -->
-システムの要件が複雑になるにつれて、より硬直的なフレームワークによるアプローチには付き物の一か八かのリスクを冒すことなしに、ストリームのピースを必要に応じて取り換えることができます。
+システムの要件が複雑になるにつれて、硬直的なフレームワークによるアプローチには付き物の一か八かのリスクを冒すことなしに、ストリームのピースを必要に応じて取り換えることができます。
