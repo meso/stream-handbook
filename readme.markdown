@@ -241,7 +241,7 @@ writable.
 To make that stream `s` into a readable stream, all we need to do is set the
 `readable` property to true:
 -->
-このストリーム`s`をreadableなものにするには、単に`reaaable`プロパティをtrueにするだけで大丈夫です。
+このストリーム`s`をreadableなものにするには、単に`readable`プロパティをtrueにするだけで大丈夫です。
 
 ``` js
 s.readable = true
